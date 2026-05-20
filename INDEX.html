@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoreo en Tiempo Real</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; text-align: center; padding: 50px; }
+        .container { background: white; padding: 30px; border-radius: 10px; display: inline-block; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .data-box { font-size: 2.5em; font-weight: bold; margin: 20px; color: #333; }
+        .label { font-size: 1em; color: #666; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Datos del Sensor en Tiempo Real</h1>
+        <hr>
+        <div>
+            <div class="label">Temperatura</div>
+            <div id="temp" class="data-box">-- °C</div>
+        </div>
+        <div>
+            <div class="label">Humedad</div>
+            <div id="hum" class="data-box">-- %</div>
+        </div>
+    </div>
+
+    <!-- Carga de módulos de Firebase -->
+    <script type="module">
+        import { initializeApp } from "hhttps://monitoreo-de-temperatura-f5496-default-rtdb.firebaseio.com/";
+        import { getDatabase, ref, onValue } from "https://monitoreo-de-temperatura-f5496-default-rtdb.firebaseio.com/";
+
+        // Configuración de tu proyecto (Copia esto desde la configuración de tu proyecto en Firebase)
+        const firebaseConfig = {
+            databaseURL: "https://monitoreo-de-temperatura-f5496-default-rtdb.firebaseio.com/"
+        };
+
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // Referencia al nodo 'lecturas'
+        const lecturasRef = ref(db, 'lecturas');
+
+        // Escuchar cambios en tiempo real
+        onValue(lecturasRef, (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                document.getElementById('temp').innerText = data.temperatura + " °C";
+                document.getElementById('hum').innerText = data.humedad + " %";
+            }
+        });
+    </script>
+</body>
+</html>
