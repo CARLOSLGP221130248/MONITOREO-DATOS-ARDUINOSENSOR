@@ -26,12 +26,11 @@
         </div>
     </div>
 
-    <!-- Carga de módulos de Firebase -->
     <script type="module">
-        import { initializeApp } from "hhttps://monitoreo-de-temperatura-f5496-default-rtdb.firebaseio.com/";
-        import { getDatabase, ref, onValue } from "https://monitoreo-de-temperatura-f5496-default-rtdb.firebaseio.com/";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
 
-        // Configuración de tu proyecto (Copia esto desde la configuración de tu proyecto en Firebase)
+        // Configuración de tu proyecto
         const firebaseConfig = {
             databaseURL: "https://monitoreo-de-temperatura-f5496-default-rtdb.firebaseio.com/"
         };
